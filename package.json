@@ -1,0 +1,26 @@
+{
+  "name": "ironhide-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bo-Wan/ironhide-test.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Bo-Wan/ironhide-test/issues"
+  },
+  "homepage": "https://github.com/Bo-Wan/ironhide-test#readme",
+  "dependencies": {
+    "aws4": "^1.10.0",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "url": "^0.11.0",
+    "winston": "^3.3.3"
+  }
+}
