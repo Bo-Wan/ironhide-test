@@ -1,6 +1,5 @@
 require('dotenv').config({path: __dirname + '/.env'});
 const { getAuthToken } = require('./ironhide');
-const { getAuthToken_v2 } = require('./ironhide_v2');
 
 (async () => {
     // const jwt = await getAuthToken_v2({

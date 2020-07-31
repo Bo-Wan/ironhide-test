@@ -37,23 +37,12 @@ const getAuthToken = async ({
         },
     };
 
-    // Get creds
     if (!awsCredentials) {
         const chain = new AWS.CredentialProviderChain();
         awsCredentials = await chain.resolvePromise();
-
         console.log('Master credentials available');
-        // // Set master credentials
-        // AWS.config.update({
-        //     credentials: awsCredentials
-        // });
-        // // create temporary credentials
-        // AWS.config.update({
-        //     credentials: new AWS.TemporaryCredentials(/* params */)
-        // });
     }
 
-    console.log(awsCredentials)
     const signedRequest = aws4.sign(requestConfig, awsCredentials);
 
     try {
@@ -62,12 +51,9 @@ const getAuthToken = async ({
         } = await axios(signedRequest);
         return token;
     } catch (e) {
-        // console.log(e);
         winston.error('Error requesting access token from iron hide ❌', e);
         throw e;
     }
-
-    console.log('awsC=' + JSON.stringify(awsCredentials));
 };
 
 module.exports = {
