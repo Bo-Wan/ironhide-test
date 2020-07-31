@@ -37,8 +37,31 @@ const getAuthToken = async ({
         },
     };
 
-    const signedRequest = aws4.sign(requestConfig);
-    // const signedRequest = aws4.sign(requestConfig, awsCredentials);
+    // TODO Get creds
+    if(!awsCredentials) {
+        const chain = new AWS.CredentialProviderChain();
+        chain.resolve(function(err, creds) {
+            if (err) {
+                console.log('No master credentials available');
+            } else {
+                console.log('Master credentials available');
+                // console.log(`creds=${JSON.stringify(creds)}`)
+                // Set master credentials
+                AWS.config.update({
+                    credentials: creds
+                });
+                // create temporary credentials
+                AWS.config.update({
+                    credentials:  new AWS.TemporaryCredentials(/* params */)
+                });
+                awsCredentials = creds;
+                // console.log('creds=' + JSON.stringify(creds))
+            }
+        });
+    }
+    console.log('awsC=' + JSON.stringify(awsCredentials));
+    // const signedRequest = aws4.sign(requestConfig);
+    const signedRequest = aws4.sign(requestConfig, awsCredentials);
     // const signedRequest = aws4.sign(requestConfig,
     //  {
     //    accessKeyId: 'ASIAXHTNH37FSPYTNLWQ',
@@ -52,7 +75,7 @@ const getAuthToken = async ({
         } = await axios(signedRequest);
         return token;
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         winston.error('Error requesting access token from iron hide ❌', e);
         throw e;
     }

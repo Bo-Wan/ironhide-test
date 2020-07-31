@@ -72,9 +72,6 @@ const getAuthToken_v2 = async ({
     // }
 
     var chain = new AWS.CredentialProviderChain();
-    // var diskProvider = new AWS.FileSystemCredentials('./creds.json');
-    var chain = new AWS.CredentialProviderChain();
-    // chain.providers.push(diskProvider);
     chain.resolve(function(err, creds) {
         if (err) {
             console.log('No master credentials available');

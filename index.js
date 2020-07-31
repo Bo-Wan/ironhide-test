@@ -3,7 +3,8 @@ const { getAuthToken } = require('./ironhide');
 const { getAuthToken_v2 } = require('./ironhide_v2');
 
 (async () => {
-    const jwt = await getAuthToken_v2({
+    // const jwt = await getAuthToken_v2({
+    const jwt = await getAuthToken({
         url: 'https://auth.stage-ap-southeast-2.iac-whispir.net/impersonate',
         companyId: '64',
         userName: 'cadmin',
